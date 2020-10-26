@@ -99,27 +99,34 @@ public:
 	}
 };
 
-class paddle: public sf::RectangleShape
+class paddle: public sf::Sprite
 {
 private:
 	int X, Y;
 	int dx = 5;
+	sf::Texture paddle_texture;
+	sf::Sprite paddle_sprite;
 public:
 	paddle(int X_pos, int Y_pos) {
 		X = X_pos;
 		Y = Y_pos;
-		setPosition(X, Y);
-		setSize(sf::Vector2f(50.f, 10.f));
-		setFillColor(sf::Color(100,100,100));
+		paddle_sprite.setPosition(X, Y);
+		paddle_texture.loadFromFile("images/paddle1.png"); 
+		paddle_sprite.setTexture(paddle_texture);
 	}
 	void paddle_move() {
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)&& (X < 580)) {
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)&& (X < 535)) {
 			X += dx;
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)&& (X > 0)) {
 			X += -dx;
 		}
-		setPosition(X, Y);
+		paddle_sprite.setPosition(X, Y);
+	}
+
+	sf::Sprite get_sprite()
+	{
+		return paddle_sprite;
 	}
 };
 class intersections:public paddle, public ball
@@ -158,9 +165,9 @@ public:
 			}
             window.clear();
 			motions_draw(circle, paddle1);
-			if (sf::FloatRect(circle->get_X(), circle->get_Y(), 10, 10).intersects(paddle1->getGlobalBounds())) circle->dy_reflect();
+			if (sf::FloatRect(circle->get_X(), circle->get_Y(), 10, 10).intersects(paddle1->get_sprite().getGlobalBounds())) circle->dy_reflect();
 			for (int i = 0; i < 100; i++)
-				if (sf::FloatRect(circle->get_X(), circle->get_Y(), 10, 10).intersects(block1[i]->getGlobalBounds()))//ïðîâåðêà íà ïåðåñå÷åíèå øàðèêà ñ áëîêîì
+				if (sf::FloatRect(circle->get_X(), circle->get_Y(), 10, 10).intersects(block1[i]->getGlobalBounds()))
 				{
 					block1[i]->setPosition(-100, 0);
 					circle->dy_reflect();
@@ -178,7 +185,7 @@ private:
     	circle->moving();
         window.draw(*circle);
 		paddle1->paddle_move();
-		window.draw(*paddle1);
+		window.draw(paddle1->get_sprite());
     }
 
 	void block_draw(block* block1){
