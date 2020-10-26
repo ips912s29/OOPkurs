@@ -14,7 +14,7 @@ public:
 		if(X > (600 - (int)X_size) || X < 0){ 
 			dx = -dx;					
 		}
-		if(Y > (600 - (int)Y_size) || Y < 0){
+		if(/*Y > (600 - (int)Y_size) ||*/Y < 0){
 			dy = -dy;
 		}
 
@@ -60,6 +60,18 @@ public:
 		setPosition(X, Y);
 	}
 
+	void dy_reflect() {
+		dy *= -1;
+	}
+
+	int get_X() {
+		int x = getPosition().x;
+		return x;
+	}
+
+	int get_Y() {
+		return getPosition().y;
+	}
 private:
 	int	r = rand()%255;
 	int	g = rand()%255;
@@ -128,7 +140,7 @@ public:
 		ball* circle = new ball;
 		block* block1[100];
 		paddle* paddle1 = new paddle(315,590);
-		int block_number = 0;
+		int block_number = 0, x = 0, y = 0;
 		for(int i = 0; i < 20; ++i) {
 			for(int j = 1; j <= 5; ++j) {
 				block1[block_number] = new block(i*45,j*21);
@@ -143,7 +155,7 @@ public:
 			}
             window.clear();
 			motions_draw(circle, paddle1);
-			
+			if (sf::FloatRect(x = circle->get_X(), y = circle->get_Y(), 10, 10).intersects(paddle1->getGlobalBounds())) circle->dy_reflect();
 			for(int i = 0; i < 100; ++i) block_draw(block1[i]);
 		    window.display();
     	}
