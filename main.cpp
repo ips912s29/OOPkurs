@@ -159,6 +159,12 @@ public:
             window.clear();
 			motions_draw(circle, paddle1);
 			if (sf::FloatRect(circle->get_X(), circle->get_Y(), 10, 10).intersects(paddle1->getGlobalBounds())) circle->dy_reflect();
+			for (int i = 0; i < 100; i++)
+				if (sf::FloatRect(circle->get_X(), circle->get_Y(), 10, 10).intersects(block1[i]->getGlobalBounds()))//ïðîâåðêà íà ïåðåñå÷åíèå øàðèêà ñ áëîêîì
+				{
+					block1[i]->setPosition(-100, 0);
+					circle->dy_reflect();
+				}
 			for(int i = 0; i < 100; ++i) block_draw(block1[i]);
 		    window.display();
     	}
