@@ -37,8 +37,8 @@ public:
 		radius = 7.f;
 		X = 300;
 		Y = 300;
-		dx = 2;
-		dy = 2;
+		dx = 4;
+		dy = 4;
 		setRadius(radius);
 		setPosition(X, Y);
 		setFillColor(sf::Color(r,g,b));
@@ -64,9 +64,12 @@ public:
 		dy *= -1;
 	}
 
+	void dx_reflect() {
+		dx *= -1;
+	}
+
 	int get_X() {
-		int x = getPosition().x;
-		return x;
+		return getPosition().x;;
 	}
 
 	int get_Y() {
@@ -140,7 +143,7 @@ public:
 		ball* circle = new ball;
 		block* block1[100];
 		paddle* paddle1 = new paddle(315,590);
-		int block_number = 0, x = 0, y = 0;
+		int block_number = 0;
 		for(int i = 0; i < 20; ++i) {
 			for(int j = 1; j <= 5; ++j) {
 				block1[block_number] = new block(i*45,j*21);
@@ -155,7 +158,7 @@ public:
 			}
             window.clear();
 			motions_draw(circle, paddle1);
-			if (sf::FloatRect(x = circle->get_X(), y = circle->get_Y(), 10, 10).intersects(paddle1->getGlobalBounds())) circle->dy_reflect();
+			if (sf::FloatRect(circle->get_X(), circle->get_Y(), 10, 10).intersects(paddle1->getGlobalBounds())) circle->dy_reflect();
 			for(int i = 0; i < 100; ++i) block_draw(block1[i]);
 		    window.display();
     	}
