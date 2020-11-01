@@ -31,9 +31,9 @@ protected:
 	int dy;
 };
 
-class ball: public sf::CircleShape, public class_movement{
+class Ball: public sf::CircleShape, public class_movement{
 public:
-	ball(){
+	Ball(){
 		radius = 7.f;
 		X = 300;
 		Y = 300;
@@ -44,7 +44,7 @@ public:
 		setFillColor(sf::Color(r,g,b));
 	}
 
-	ball(float rad, int X_pos, int Y_pos){
+	Ball(float rad, int X_pos, int Y_pos){
 		X = X_pos;
 		Y = Y_pos;
 		dx = 2;
@@ -82,7 +82,7 @@ private:
 	float radius;
 };
 
-class block: public sf::RectangleShape
+class Block: public sf::RectangleShape
 {
 private:
 	int	r = rand()%255;
@@ -90,7 +90,7 @@ private:
 	int	b = rand()%255;
 	int X, Y;
 public:
-	block(int X_pos, int Y_pos) {
+	Block(int X_pos, int Y_pos) {
 		X = X_pos;
 		Y = Y_pos;
 		setPosition(X, Y);
@@ -99,7 +99,7 @@ public:
 	}
 };
 
-class paddle: public sf::Sprite
+class Paddle: public sf::Sprite
 {
 private:
 	int X, Y;
@@ -107,7 +107,7 @@ private:
 	sf::Texture paddle_texture;
 	sf::Sprite paddle_sprite;
 public:
-	paddle(int X_pos, int Y_pos) {
+	Paddle(int X_pos, int Y_pos) {
 		X = X_pos;
 		Y = Y_pos;
 		paddle_sprite.setPosition(X, Y);
@@ -129,10 +129,7 @@ public:
 		return paddle_sprite;
 	}
 };
-class intersections:public paddle, public ball
-{
 
-};
 class class_window{
 public:			 
 	class_window(){
@@ -147,13 +144,13 @@ public:
 
 	void start(){
 		srand(time(0));
-		ball* circle = new ball;
-		block* block1[100];
-		paddle* paddle1 = new paddle(315,590);
+		Ball* ball = new Ball;
+		Block* block[100];
+		Paddle* paddle = new Paddle(315,590);
 		int block_number = 0;
 		for(int i = 0; i < 20; ++i) {
 			for(int j = 1; j <= 5; ++j) {
-				block1[block_number] = new block(i*45,j*21);
+				block[block_number] = new Block(i*45,j*21);
 				block_number++;	
 			}
 		}
@@ -164,32 +161,32 @@ public:
 					window.close();
 			}
             window.clear();
-			motions_draw(circle, paddle1);
-			if (sf::FloatRect(circle->get_X(), circle->get_Y(), 10, 10).intersects(paddle1->get_sprite().getGlobalBounds())) circle->dy_reflect();
+			motions_draw(ball, paddle);
+			if (sf::FloatRect(ball->get_X(), ball->get_Y(), 10, 10).intersects(paddle->get_sprite().getGlobalBounds())) ball->dy_reflect();
 			for (int i = 0; i < 100; i++)
-				if (sf::FloatRect(circle->get_X(), circle->get_Y(), 10, 10).intersects(block1[i]->getGlobalBounds()))
+				if (sf::FloatRect(ball->get_X(), ball->get_Y(), 10, 10).intersects(block[i]->getGlobalBounds()))
 				{
-					block1[i]->setPosition(-100, 0);
-					circle->dy_reflect();
+					block[i]->setPosition(-100, 0);
+					ball->dy_reflect();
 				}
-			for(int i = 0; i < 100; ++i) block_draw(block1[i]);
+			for(int i = 0; i < 100; ++i) block_draw(block[i]);
 		    window.display();
     	}
-    	delete circle;
-		for(int i = 0; i < 100; ++i) delete(block1[i]);
+    	delete ball;
+		for(int i = 0; i < 100; ++i) delete(block[i]);
 	};
 
 private:
 
-    void motions_draw(ball* circle, paddle* paddle1){
-    	circle->moving();
-        window.draw(*circle);
-		paddle1->paddle_move();
-		window.draw(paddle1->get_sprite());
+    void motions_draw(Ball* ball, Paddle* paddle){
+    	ball->moving();
+        window.draw(*ball);
+		paddle->paddle_move();
+		window.draw(paddle->get_sprite());
     }
 
-	void block_draw(block* block1){
-        window.draw(*block1);
+	void block_draw(Block* block){
+        window.draw(*block);
     }
 
     sf::RenderWindow window; //экземпляр окна
