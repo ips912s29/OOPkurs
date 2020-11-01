@@ -2,6 +2,7 @@
 #include "header/block.hpp"
 #include "header/paddle.hpp"
 #include "header/ball.hpp"
+
 class class_window{
 public:			 
 	class_window(){
@@ -16,13 +17,13 @@ public:
 
 	void start(){
 		srand(time(0));
-		Ball* circle = new Ball;
-		Block* block1[100];
-		Paddle* paddle1 = new Paddle(315,590);
+		Ball* ball = new Ball;
+		Block* block[100];
+		Paddle* paddle = new Paddle(315,590);
 		int block_number = 0;
 		for(int i = 0; i < 20; ++i) {
 			for(int j = 1; j <= 5; ++j) {
-				block1[block_number] = new Block(i*45,j*21);
+				block[block_number] = new Block(i*45,j*21);
 				block_number++;	
 			}
 		}
@@ -33,32 +34,32 @@ public:
 					window.close();
 			}
             window.clear();
-			motions_draw(circle, paddle1);
-			if (sf::FloatRect(circle->get_X(), circle->get_Y(), 10, 10).intersects(paddle1->get_sprite().getGlobalBounds())) circle->dy_reflect();
+			motions_draw(ball, paddle);
+			if (sf::FloatRect(ball->get_X(), ball->get_Y(), 10, 10).intersects(paddle->get_sprite().getGlobalBounds())) ball->dy_reflect();
 			for (int i = 0; i < 100; i++)
-				if (sf::FloatRect(circle->get_X(), circle->get_Y(), 10, 10).intersects(block1[i]->getGlobalBounds()))
+				if (sf::FloatRect(ball->get_X(), ball->get_Y(), 10, 10).intersects(block[i]->getGlobalBounds()))
 				{
-					block1[i]->setPosition(-100, 0);
-					circle->dy_reflect();
+					block[i]->setPosition(-100, 0);
+					ball->dy_reflect();
 				}
-			for(int i = 0; i < 100; ++i) block_draw(block1[i]);
+			for(int i = 0; i < 100; ++i) block_draw(block[i]);
 		    window.display();
     	}
-    	delete circle;
-		for(int i = 0; i < 100; ++i) delete(block1[i]);
+    	delete ball;
+		for(int i = 0; i < 100; ++i) delete(block[i]);
 	};
 
 private:
 
-    void motions_draw(Ball* circle, Paddle* paddle1){
-    	circle->moving();
-        window.draw(*circle);
-		paddle1->paddle_move();
-		window.draw(paddle1->get_sprite());
+    void motions_draw(Ball* ball, Paddle* paddle){
+    	ball->moving();
+        window.draw(*ball);
+		paddle->paddle_move();
+		window.draw(paddle->get_sprite());
     }
 
-	void block_draw(Block* block1){
-        window.draw(*block1);
+	void block_draw(Block* block){
+        window.draw(*block);
     }
 
     sf::RenderWindow window; //экземпляр окна
