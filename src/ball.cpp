@@ -1,7 +1,7 @@
 #include "header/ball.hpp"
 	Ball::Ball() {
 		radius = 7.f;
-		X = 300;
+		X = 295;
 		Y = 300;
 		dx = 4;
 		dy = 4;
@@ -21,8 +21,8 @@
 		setFillColor(sf::Color(r,g,b));
 	}
 
-	void Ball::moving()  { 
-		move_update(radius*2, radius*2);
+	void Ball::moving(Paddle* paddle, Block* block[100])  { 
+		move_update(radius*2, radius*2,paddle, block);
 		setPosition(X, Y);
 	}
 

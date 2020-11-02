@@ -7,12 +7,14 @@
 #include <stdlib.h>
 #include <time.h>
 #include <cmath>
+#include "paddle.hpp"
+#include "block.hpp"
 
 class class_movement{
 public:
-	void move_update(int X_size, int Y_size);
+	void move_update(int X_size, int Y_size, Paddle* paddle, Block* block[100]);
 	
-	virtual void moving() = 0; 
+	virtual void moving(Paddle* paddle, Block* block[100]) = 0; 
 
 protected:
 	int X;

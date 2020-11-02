@@ -1,13 +1,13 @@
 #pragma once
-
 #include "movement.hpp"
+
 class Ball: public sf::CircleShape, public class_movement{
 public:
 	Ball();
 
 	Ball(float rad, int X_pos, int Y_pos);
 
-	void moving() override;
+	void moving(Paddle* paddle, Block* block[100]) override;
 
 	void dy_reflect();
 

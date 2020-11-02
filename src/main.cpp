@@ -34,7 +34,7 @@ public:
 					window.close();
 			}
             window.clear();
-			motions_draw(ball, paddle);
+			motions_draw(ball, paddle, block);
 			if (sf::FloatRect(ball->get_X(), ball->get_Y(), 10, 10).intersects(paddle->get_sprite().getGlobalBounds())) ball->dy_reflect();
 			for (int i = 0; i < 100; i++)
 				if (sf::FloatRect(ball->get_X(), ball->get_Y(), 10, 10).intersects(block[i]->getGlobalBounds()))
@@ -42,7 +42,7 @@ public:
 					block[i]->setPosition(-100, 0);
 					ball->dy_reflect();
 				}
-			for(int i = 0; i < 100; ++i) block_draw(block[i]);
+			for (int i = 0; i < 100; i++) block_draw(block[i]);
 		    window.display();
     	}
     	delete ball;
@@ -51,8 +51,8 @@ public:
 
 private:
 
-    void motions_draw(Ball* ball, Paddle* paddle){
-    	ball->moving();
+    void motions_draw(Ball* ball, Paddle* paddle, Block* block[100]){
+    	ball->moving(paddle, block);
         window.draw(*ball);
 		paddle->paddle_move();
 		window.draw(paddle->get_sprite());
