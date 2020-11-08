@@ -22,9 +22,9 @@
 		X = X_pos;
 		Y = Y_pos;
 		setPosition(X, Y);
-		setFillColor(sf::Color(r,g,b));
+		setFillColor(sf::Color(100, 100, 100));
 		setSize(sf::Vector2f(44.f, 20.f));
-		breakable = 1;
+		breakable = 0;
 	}
 
 	bool Block::get_breakable() {
