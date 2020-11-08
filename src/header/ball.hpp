@@ -7,7 +7,7 @@ public:
 
 	Ball(float rad, int X_pos, int Y_pos);
 
-	void moving(Paddle* paddle, Block* block[100]) override;
+	void moving(Paddle* paddle, Block* block[70]) override;
 
 	void dy_reflect();
 

@@ -12,9 +12,9 @@
 
 class class_movement{
 public:
-	void move_update(int X_size, int Y_size, Paddle* paddle, Block* block[100]);
+	void move_update(int X_size, int Y_size, Paddle* paddle, Block* block[70]);
 	
-	virtual void moving(Paddle* paddle, Block* block[100]) = 0; 
+	virtual void moving(Paddle* paddle, Block* block[70]) = 0; 
 
 protected:
 	int X;

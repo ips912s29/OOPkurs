@@ -10,11 +10,20 @@
 
 class Block: public sf::RectangleShape
 {
-private:
+protected:
 	int	r = rand()%255;
 	int	g = rand()%255;
 	int	b = rand()%255;
 	int X, Y;
+	bool breakable = 1;
 public:
 	Block(int X_pos, int Y_pos);
+	bool get_breakable();
+	void set_breakable(bool x);
+};
+
+class Gray_Block: public Block
+{
+public:
+	Gray_Block(int X_pos, int Y_pos);
 };

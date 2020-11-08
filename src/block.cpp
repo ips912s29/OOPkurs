@@ -7,3 +7,11 @@
 		setFillColor(sf::Color(r,g,b));
 		setSize(sf::Vector2f(44.f, 20.f));
 	}
+
+	bool Block::get_breakable() {
+		return breakable;
+	}
+
+	void Block::set_breakable(bool x) {
+		breakable = x;
+	}

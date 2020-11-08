@@ -21,7 +21,7 @@
 		setFillColor(sf::Color(r,g,b));
 	}
 
-	void Ball::moving(Paddle* paddle, Block* block[100])  { 
+	void Ball::moving(Paddle* paddle, Block* block[70])  { 
 		move_update(radius*2, radius*2,paddle, block);
 		setPosition(X, Y);
 	}

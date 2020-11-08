@@ -18,10 +18,10 @@ public:
 	void start(){
 		srand(time(0));
 		Ball* ball = new Ball;
-		Block* block[100];
+		Block* block[70];
 		Paddle* paddle = new Paddle(315,590);
 		int block_number = 0;
-		for(int i = 0; i < 20; ++i) {
+		for(int i = 0; i < 14; ++i) {
 			for(int j = 1; j <= 5; ++j) {
 				block[block_number] = new Block(i*45,j*21);
 				block_number++;	
@@ -35,23 +35,16 @@ public:
 			}
             window.clear();
 			start(ball, paddle, block);
-			if (sf::FloatRect(ball->get_X(), ball->get_Y(), 10, 10).intersects(paddle->get_sprite().getGlobalBounds())) ball->dy_reflect();
-			for (int i = 0; i < 100; i++)
-				if (sf::FloatRect(ball->get_X(), ball->get_Y(), 10, 10).intersects(block[i]->getGlobalBounds()))
-				{
-					block[i]->setPosition(-100, 0);
-					ball->dy_reflect();
-				}
-			for (int i = 0; i < 100; i++) block_draw(block[i]);
+			for (int i = 0; i < 70; i++) block_draw(block[i]);
 		    window.display();
     	}
     	delete ball;
-		for(int i = 0; i < 100; ++i) delete(block[i]);
+		for(int i = 0; i < 70; ++i) delete(block[i]);
 	};
 
 private:
 
-    void start(Ball* ball, Paddle* paddle, Block* block[100]){
+    void start(Ball* ball, Paddle* paddle, Block* block[70]){
     	ball->moving(paddle, block);
         window.draw(*ball);
 		paddle->paddle_move();
