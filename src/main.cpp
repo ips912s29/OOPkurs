@@ -22,11 +22,13 @@ public:
 		Paddle* paddle = new Paddle(315,590);
 		int block_number = 0;
 		for(int i = 0; i < 14; ++i) {
-			for(int j = 1; j <= 5; ++j) {
+			for(int j = 2; j <= 6; ++j) {
 				block[block_number] = new Block(i*45,j*21);
 				block_number++;	
 			}
 		}
+		bool x = 0;
+		for(int i = 4; i < 70; i+=5) block[i]->set_breakable(x);
 		while(window.isOpen()){
 			sf::Event event;
         	while (window.pollEvent(event)) {

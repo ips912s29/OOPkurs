@@ -15,11 +15,14 @@ protected:
 	int	g = rand()%255;
 	int	b = rand()%255;
 	int X, Y;
-	bool breakable = 1;
+	bool breakable;
 public:
+	Block();
 	Block(int X_pos, int Y_pos);
 	bool get_breakable();
 	void set_breakable(bool x);
+	int get_X();
+	int get_Y();
 };
 
 class Gray_Block: public Block
