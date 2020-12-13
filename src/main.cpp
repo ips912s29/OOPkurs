@@ -22,7 +22,7 @@ public:
 		Paddle* paddle = new Paddle(315,590);
 		int block_number = 0;
 		for(int i = 0; i < 14; ++i) {
-			block[block_number] = new Gray_Block(i*45, 5*21);
+			block[block_number] = new Gray_Block(i*45, 0*21);
 			block_number++;
 		}
 		for(int i = 0; i < 14; ++i) {

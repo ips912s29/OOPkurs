@@ -1,5 +1,5 @@
 #include "header/ball.hpp"
-	Ball::Ball() {
+	Ball::Ball(): r(184), g(184), b(148) {
 		radius = 7.f;
 		X = 295;
 		Y = 300;
@@ -10,7 +10,7 @@
 		setFillColor(sf::Color(r,g,b));
 	}
 
-	Ball::Ball(float rad, int X_pos, int Y_pos){
+	Ball::Ball(float rad, int X_pos, int Y_pos): r(184), g(184), b(148) {
 		X = X_pos;
 		Y = Y_pos;
 		dx = 2;
